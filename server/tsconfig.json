@@ -6,6 +6,7 @@
         "noImplicitAny": true,
         "moduleResolution": "node",
         "sourceMap": true,
+        "skipLibCheck": true, //removes mongoose err
         "outDir": "dist",
         "baseUrl": ".",
         "paths": {

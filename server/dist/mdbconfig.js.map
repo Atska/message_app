@@ -1,1 +1,1 @@
-{"version":3,"file":"mdbconfig.js","sourceRoot":"","sources":["../src/mdbconfig.ts"],"names":[],"mappings":"AAAA,MAAM,CAAC,OAAO,GAAG;IACf,OAAO,EACL,mGAAmG;CACtG,CAAC;AAEF,MAAM,GAAG,GACP,qFAAqF,CAAC"}
+{"version":3,"file":"mdbconfig.js","sourceRoot":"","sources":["../src/mdbconfig.ts"],"names":[],"mappings":";;;AAAa,QAAA,UAAU,GACrB,0FAA0F,CAAC"}

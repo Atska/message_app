@@ -1,21 +1,51 @@
-const { ApolloServer, gql } = require("apollo-server");
-const mongoose = require("mongoose");
+"use strict";
+var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
+    function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
+    return new (P || (P = Promise))(function (resolve, reject) {
+        function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
+        function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
+        function step(result) { result.done ? resolve(result.value) : adopt(result.value).then(fulfilled, rejected); }
+        step((generator = generator.apply(thisArg, _arguments || [])).next());
+    });
+};
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
+Object.defineProperty(exports, "__esModule", { value: true });
+const mongoose_1 = __importDefault(require("mongoose"));
+const apollo_server_1 = require("apollo-server");
 //
-const { mongoPW } = require("./mdbconfig");
-const typeDefs = gql `
+const mdbconfig_1 = require("./mdbconfig");
+const post_model_1 = __importDefault(require("./models/post.model"));
+const typeDefs = apollo_server_1.gql `
   type Query {
-    helloWorld: String!
+    allPosts: [Post]
+  }
+
+  type Post {
+    id: ID
+    username: String
+    text: String
+    date: String
   }
 `;
 const resolvers = {
     Query: {
-        helloWorld: () => `${mongoPW}`,
+        allPosts: () => __awaiter(void 0, void 0, void 0, function* () {
+            try {
+                const posts = yield post_model_1.default.find();
+                return posts;
+            }
+            catch (err) {
+                throw new Error(err);
+            }
+        }),
     },
 };
-const server = new ApolloServer({ typeDefs, resolvers });
+const server = new apollo_server_1.ApolloServer({ typeDefs, resolvers });
 //mongodb
-mongoose
-    .connect(mongoPW, { useNewUrlParser: true, useUnifiedTopology: true })
+mongoose_1.default
+    .connect(mdbconfig_1.mongoDB_PW, { useNewUrlParser: true, useUnifiedTopology: true })
     .then(() => {
     console.log("Mongo connected!");
     return server.listen({ port: 5000 });

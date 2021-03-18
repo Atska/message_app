@@ -1,16 +1,32 @@
 import mongoose from "mongoose";
 import { ApolloServer, gql } from "apollo-server";
-import { mongoPW } from "./mdbconfig";
+//
+import { mongoDB_PW } from "./mdbconfig";
+import Post from "./models/post.model";
 
 const typeDefs = gql`
   type Query {
-    helloWorld: String!
+    allPosts: [Post]
+  }
+
+  type Post {
+    id: ID
+    username: String
+    text: String
+    date: String
   }
 `;
 
 const resolvers = {
   Query: {
-    helloWorld: (): string => `${mongoPW}`,
+    allPosts: async () => {
+      try {
+        const posts = await Post.find();
+        return posts;
+      } catch (err: any) {
+        throw new Error(err);
+      }
+    },
   },
 };
 
@@ -18,7 +34,7 @@ const server: ApolloServer = new ApolloServer({ typeDefs, resolvers });
 
 //mongodb
 mongoose
-  .connect(mongoPW, { useNewUrlParser: true, useUnifiedTopology: true })
+  .connect(mongoDB_PW, { useNewUrlParser: true, useUnifiedTopology: true })
   .then(() => {
     console.log("Mongo connected!");
     return server.listen({ port: 5000 });
