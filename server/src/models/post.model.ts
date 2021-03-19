@@ -1,20 +1,6 @@
-import { Schema, model, Document } from "mongoose";
+import { Schema, model } from "mongoose";
 //
-import { IUser } from "./user.model";
-
-interface IComment extends Document {
-  text: string;
-  username: string;
-  date: string;
-}
-
-interface IPost extends Document {
-  text: string;
-  username: string;
-  date: string;
-  comments: Array<IComment>;
-  user_id: IUser;
-}
+import { IPost } from "./interfaces";
 
 const PostSchema = new Schema({
   text: String,

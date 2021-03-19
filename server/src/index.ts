@@ -1,35 +1,11 @@
 import mongoose from "mongoose";
-import { ApolloServer, gql } from "apollo-server";
+import { ApolloServer } from "apollo-server";
 //
 import { mongoDB_PW } from "./mdbconfig";
-import Post from "./models/post.model";
+import typeDefs from "./graphql/types";
+import resolvers from "./graphql/resolvers";
 
-const typeDefs = gql`
-  type Query {
-    allPosts: [Post]
-  }
-
-  type Post {
-    id: ID
-    username: String
-    text: String
-    date: String
-  }
-`;
-
-const resolvers = {
-  Query: {
-    allPosts: async () => {
-      try {
-        const posts = await Post.find();
-        return posts;
-      } catch (err: any) {
-        throw new Error(err);
-      }
-    },
-  },
-};
-
+// typeDefs -> types of the resolvers || resolvers -> database queries
 const server: ApolloServer = new ApolloServer({ typeDefs, resolvers });
 
 //mongodb
