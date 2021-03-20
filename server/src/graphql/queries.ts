@@ -6,7 +6,6 @@ export default {
     allPosts: async (): Promise<IPost[]> => {
       try {
         const posts = await Post.find();
-        console.log(posts);
         return posts;
       } catch (err: any) {
         throw new Error(err);

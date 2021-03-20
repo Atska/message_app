@@ -13,7 +13,8 @@ export default gql`
   }
 
   type Mutation {
-    signup(signupInput: signup): User
+    signup(signupInput: signup!): User!
+    login(loginInput: login!): User!
   }
 
   input signup {
@@ -23,9 +24,16 @@ export default gql`
     email: String!
   }
 
-  type User {
-    id: ID
+  input login {
     username: String!
     email: String!
+    password: String!
+  }
+
+  type User {
+    id: ID!
+    username: String!
+    email: String!
+    token: String!
   }
 `;
