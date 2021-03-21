@@ -6,7 +6,13 @@ import typeDefs from "./graphql/types";
 import resolvers from "./graphql/resolvers";
 
 // typeDefs -> types of the resolvers || resolvers -> database queries
-const server: ApolloServer = new ApolloServer({ typeDefs, resolvers });
+const server: ApolloServer = new ApolloServer({
+  typeDefs,
+  resolvers,
+  context: ({ req }) => ({
+    req,
+  }),
+});
 
 //mongodb
 mongoose

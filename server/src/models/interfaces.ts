@@ -15,8 +15,9 @@ export interface IPost extends Document {
 }
 
 export interface IUser extends Document {
-  username: String;
-  password: String;
-  confirmPassword: String;
-  email: String;
+  _doc: any;
+  username: string;
+  password: string;
+  confirmPassword: string;
+  email: string;
 }

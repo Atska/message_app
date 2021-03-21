@@ -1,8 +1,17 @@
 import { gql } from "apollo-server";
 
 export default gql`
+  type Mutation {
+    signup(signupInput: signup!): User!
+    login(loginInput: login!): User!
+    createPost(text: String!): Post!
+    updatePost(post_id: ID!, text: String!): String!
+    deletePost(post_id: ID!): String!
+  }
+
   type Query {
     allPosts: [Post]
+    findPost(post_id: ID!): Post
   }
 
   type Post {
@@ -10,11 +19,6 @@ export default gql`
     username: String
     text: String
     date: String
-  }
-
-  type Mutation {
-    signup(signupInput: signup!): User!
-    login(loginInput: login!): User!
   }
 
   input signup {
@@ -35,5 +39,6 @@ export default gql`
     username: String!
     email: String!
     token: String!
+    date: String!
   }
 `;
