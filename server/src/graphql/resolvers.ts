@@ -1,11 +1,27 @@
 import queriesResolver from "./queries";
-import mutationResolver from "./mutations";
+// Mutations
+import signup from "./mutations/signup";
+import login from "./mutations/login";
+import createPost from "./mutations/createPost";
+import deletePost from "./mutations/deletePost";
+import updatePost from "./mutations/updatePost";
+
+// Queries
+import findPost from "./queries/findPost";
+import allPosts from "./queries/allPosts";
+import findUser from "./queries/findUser";
 
 export default {
   Query: {
-    ...queriesResolver.Query,
+    findPost: findPost,
+    allPosts: allPosts,
+    findUser: findUser,
   },
   Mutation: {
-    ...mutationResolver.Mutation,
+    signup: signup,
+    login: login,
+    createPost: createPost,
+    deletePost: deletePost,
+    updatePost: updatePost,
   },
 };

@@ -12,6 +12,7 @@ export default gql`
   type Query {
     allPosts: [Post]
     findPost(post_id: ID!): Post
+    findUser(username: String!): User!
   }
 
   type Post {
