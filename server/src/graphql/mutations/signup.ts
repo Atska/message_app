@@ -7,7 +7,20 @@ import { privateKey } from "../../mdbconfig";
 import { IUser } from "../../models/interfaces";
 import { SignupValidator } from "../../helperFunctions/validators";
 
-export default async (parent: any, args: any, context: any, info: any) => {
+interface ISignUp {
+  username: string;
+  id: string;
+  token: string;
+  email: string;
+  date: string;
+}
+
+export default async (
+  parent: any,
+  args: any,
+  context: any,
+  info: any
+): Promise<ISignUp> => {
   let { username, email, password, confirmPassword } = args.signupInput;
   // validate all data
   const val = new SignupValidator(username, email, password, confirmPassword);
@@ -37,12 +50,12 @@ export default async (parent: any, args: any, context: any, info: any) => {
     date: new Date().toLocaleDateString(),
   });
   const user: IUser = await newUser.save();
-  // generate jwt token with
+  // generate jwt token so user is authenticated
   const token: string = jwt.sign(
     { id: user.id, email: user.email, username: user.username },
     privateKey,
     {
-      expiresIn: "1h",
+      expiresIn: "2h",
     }
   );
   //doc is the object || console.log(..user) for infos

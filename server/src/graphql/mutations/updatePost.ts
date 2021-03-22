@@ -4,7 +4,11 @@ import Post from "../../models/post.model";
 import JWTverifier from "../../helperFunctions/JWTverifier";
 import { IPost } from "../../models/interfaces";
 
-export default async (parent: any, args: any, context: any, info: any) => {
+export default async (
+  parent: any,
+  args: any,
+  context: any
+): Promise<string> => {
   const { post_id, text } = args;
   // check if text input is valid
   if (text.length === 0) throw new UserInputError("There is no text.");
@@ -19,7 +23,7 @@ export default async (parent: any, args: any, context: any, info: any) => {
     try {
       const newText: string = text;
       await Post.findByIdAndUpdate(post, { text: newText });
-      return "Post was updated.";
+      return "Post successfully updated.";
     } catch (err) {
       throw new Error(err);
     }

@@ -4,7 +4,11 @@ import Post from "../../models/post.model";
 import JWTverifier from "../../helperFunctions/JWTverifier";
 import { IPost } from "../../models/interfaces";
 
-export default async (parent: any, args: any, context: any, info: any) => {
+export default async (
+  parent: any,
+  args: any,
+  context: any
+): Promise<string> => {
   const { post_id } = args;
   // grab the user infomation from jwt
   const user = JWTverifier(context);

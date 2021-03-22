@@ -1,10 +1,11 @@
-import queriesResolver from "./queries";
 // Mutations
 import signup from "./mutations/signup";
 import login from "./mutations/login";
 import createPost from "./mutations/createPost";
 import deletePost from "./mutations/deletePost";
 import updatePost from "./mutations/updatePost";
+import createComment from "./mutations/createComment";
+import deleteComment from "./mutations/deleteComment";
 
 // Queries
 import findPost from "./queries/findPost";
@@ -23,5 +24,7 @@ export default {
     createPost: createPost,
     deletePost: deletePost,
     updatePost: updatePost,
+    createComment: createComment,
+    deleteComment: deleteComment,
   },
 };

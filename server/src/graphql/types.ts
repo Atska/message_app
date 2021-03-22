@@ -7,19 +7,24 @@ export default gql`
     createPost(text: String!): Post!
     updatePost(post_id: ID!, text: String!): String!
     deletePost(post_id: ID!): String!
+    createComment(post_id: ID!, text: String!): Comment!
+    deleteComment(post_id: ID!, comment_id: ID!): String!
+    like(post_id: ID!): String!
   }
 
   type Query {
-    allPosts: [Post]
-    findPost(post_id: ID!): Post
+    allPosts: [Post]!
+    findPost(post_id: ID!): Post!
     findUser(username: String!): User!
   }
 
   type Post {
-    id: ID
-    username: String
-    text: String
-    date: String
+    id: ID!
+    username: String!
+    text: String!
+    date: String!
+    comments: [Comment]!
+    likes: [Like]!
   }
 
   input signup {
@@ -41,5 +46,17 @@ export default gql`
     email: String!
     token: String!
     date: String!
+  }
+
+  type Comment {
+    id: ID!
+    text: String!
+    username: String!
+    date: String!
+  }
+
+  type Like {
+    id: ID!
+    username: String!
   }
 `;

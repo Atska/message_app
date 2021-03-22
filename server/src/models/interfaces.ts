@@ -6,11 +6,17 @@ export interface IComment extends Document {
   date: string;
 }
 
+export interface ILike extends Document {
+  username: string;
+  date: string;
+}
+
 export interface IPost extends Document {
   text: string;
   username: string;
   date: string;
-  comments: Array<IComment>;
+  comments: any; //IComment[]
+  likes: ILike[];
   user_id: IUser;
 }
 

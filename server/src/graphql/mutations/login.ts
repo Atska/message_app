@@ -33,7 +33,7 @@ export default async (parent: any, args: any, context: any, info: any) => {
     errors.correctPW = "Wrong password.";
     throw new UserInputError("Wrong password.", { errors });
   }
-
+  //create jwt token
   const token: string = jwt.sign(
     {
       id: existingUser.id,

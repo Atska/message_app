@@ -1,11 +1,23 @@
 import validator from "validator";
 
+export interface IError {
+  emptyUsername: string;
+  emptyEmail: string;
+  noEmail: string;
+  emptyPW: string;
+  samePW: string;
+  existingEmail: string;
+  existingUser: string;
+  correctPW: string;
+  validData: boolean;
+}
+
 class Validator {
   username: string;
   email: string;
   password: string;
   confirmPassword: string;
-  errors: any;
+  errors: IError;
 
   constructor(
     username: string,
@@ -17,7 +29,7 @@ class Validator {
     this.email = email;
     this.password = password;
     this.confirmPassword = confirmPassword;
-    this.errors = {};
+    this.errors = {} as IError; // also works: <IError>{};
   }
 
   validateUsername(): void {
@@ -35,13 +47,13 @@ class Validator {
 
   validatePassword(): void {
     if (validator.isEmpty(this.password)) {
-      this.errors.emptyPassword = "Password cannot be empty.";
+      this.errors.emptyPW = "Password cannot be empty.";
     }
   }
 
   comparePassword(): void {
     if (this.password !== this.confirmPassword) {
-      this.errors.samePw = "Passwords do not match.";
+      this.errors.samePW = "Passwords do not match.";
     }
   }
 }
