@@ -58,5 +58,6 @@ export default gql`
   type Like {
     id: ID!
     username: String!
+    date: String!
   }
 `;

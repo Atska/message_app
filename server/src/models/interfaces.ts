@@ -16,7 +16,7 @@ export interface IPost extends Document {
   username: string;
   date: string;
   comments: any; //IComment[]
-  likes: ILike[];
+  likes: any;
   user_id: IUser;
 }
 

@@ -1,6 +1,7 @@
 // Mutations
 import signup from "./mutations/signup";
 import login from "./mutations/login";
+import like from "./mutations/like";
 import createPost from "./mutations/createPost";
 import deletePost from "./mutations/deletePost";
 import updatePost from "./mutations/updatePost";
@@ -21,6 +22,7 @@ export default {
   Mutation: {
     signup: signup,
     login: login,
+    like: like,
     createPost: createPost,
     deletePost: deletePost,
     updatePost: updatePost,

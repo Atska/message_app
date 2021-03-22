@@ -1,7 +1,7 @@
 import { UserInputError, AuthenticationError } from "apollo-server";
 
 import Post from "../../models/post.model";
-import JWTverifier from "../../helperFunctions/JWTverifier";
+import JWTverifier from "../../helperFunctions/jwtVerifier";
 import { IPost } from "../../models/interfaces";
 
 export default async (parent: any, args: any, context: any): Promise<IPost> => {

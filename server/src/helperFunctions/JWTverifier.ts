@@ -3,7 +3,7 @@ import { privateKey } from "../mdbconfig";
 import { AuthenticationError } from "apollo-server";
 
 /**
- * Verify the jwt
+ * Verify and decode the jwt
  * @param context Context object from graphql
  * @returns user object
  */
