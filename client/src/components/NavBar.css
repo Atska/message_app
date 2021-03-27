@@ -1,0 +1,25 @@
+.navbar {
+  height: 70px;
+  box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.3);
+  overflow-y: hidden;
+  overflow-x: hidden;
+  background: #001f3f;
+  color: lavender;
+}
+
+.flex {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.container-login-signup a {
+  margin: 0px 10px;
+  font-size: large;
+  cursor: pointer;
+  color: inherit;
+  text-align: center;
+  text-decoration: underline lavender;
+  font-weight: 600;
+  text-decoration: none;
+}
