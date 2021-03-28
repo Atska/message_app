@@ -4,32 +4,66 @@
   text-align: center;
   box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
   width: 80%;
-  max-width: 450px;
-  background: burlywood;
+  max-width: 500px;
+  background: #003d7a;
+  color: white;
+  padding: 0.5em;
+  margin: 2rem auto;
 }
 
+.container-comments {
+  padding: 20px 50px;
+  border: 5px solid blue;
+}
+
+.flex {
+  display: flex;
+}
+
+/***************
+    Header
+***************/
+
 .container-header {
-  border: 2px solid green;
   display: flex;
   align-items: center;
   justify-content: space-evenly;
+  margin: auto 10px;
+  padding-bottom: 1em;
+  border-bottom: 1px solid rgb(255, 255, 255);
 }
 
 .profile-image {
-  height: auto;
-  width: 70px;
+  display: flex;
+  max-width: 70px;
   border-radius: 50%;
-  border: 3px solid red;
+  border: 3px solid grey;
+  margin: auto 10px;
+}
+
+.username {
+  font-size: 1rem;
+  line-height: 1;
 }
 
 /***************
     Message
 ***************/
 .container-message {
-  border: 1px solid green;
   width: 90%;
-  max-width: 380px;
-  margin: 0 auto;
+  margin: 10px auto;
+  padding: 5px;
+  text-align: start;
+}
+
+.message {
+  font-size: small;
+  font-weight: 300;
+}
+
+.date {
+  font-size: small;
+  opacity: 0.6;
 }
 
 /***************
@@ -39,15 +73,14 @@
   display: flex;
   align-items: center;
   justify-content: space-around;
-  border: 1px solid blue;
   height: 40px;
   width: 60%;
   max-width: 400px;
-  margin: 0 auto;
+  margin: 5px auto;
+  position: static;
 }
 
 .container-btns button {
-  padding: 5px;
   padding: 8px;
   border-radius: 30%;
   border: 1px 0 black;
@@ -59,10 +92,39 @@
   opacity: 1;
 }
 
-.action-btns {
+.flex-btn {
   display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: auto;
 }
 
-.post-btns {
-  display: flex;
+/***************
+  Media queries
+***************/
+
+@media (min-width: 450px) {
+  .container-card {
+    flex-direction: row;
+  }
+
+  .container-header {
+    flex-direction: column;
+    padding-bottom: 0;
+    border-bottom: 0;
+    padding-right: 1em;
+    border-right: 1px solid white;
+  }
+
+  .container-message {
+    min-width: 230px;
+    min-height: 110px;
+    margin: auto;
+  }
+
+  .container-wrap {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
 }
