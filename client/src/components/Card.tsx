@@ -1,5 +1,6 @@
 import * as React from "react";
 import dayjs from "dayjs";
+import { ApolloError } from "@apollo/client";
 import relativeTime from "dayjs/plugin/relativeTime";
 //icons
 import { AiFillHeart, AiFillMessage } from "react-icons/ai";
@@ -8,15 +9,38 @@ import { FaEdit, FaTrashAlt } from "react-icons/fa";
 import "./Card.css";
 import logo from "../avatars/5.jpg";
 
-interface ICard {}
+interface ILike {
+  username: string;
+  date: string;
+}
 
-const Card = (props: any) => {
-  const { error, loading } = props;
+interface IComment {
+  text: string;
+  username: string;
+  date: string;
+}
 
+interface ICard {
+  username: string;
+  date: string;
+  text: string;
+  likes: ILike[];
+  comments: IComment[];
+  loading: boolean;
+  error: ApolloError | undefined;
+}
+
+const Card = ({
+  username,
+  date,
+  text,
+  likes,
+  comments,
+  loading,
+  error,
+}: ICard) => {
   if (loading) return <p>Loading ...</p>;
   if (error) return <p>404..</p>;
-
-  const { username, date, text, likes, comments } = props;
 
   //format ISO-string time to relative time
   dayjs.extend(relativeTime);
@@ -36,13 +60,7 @@ const Card = (props: any) => {
         <div className="container-wrap">
           <div className="container-message">
             <div className="message">
-              <p>
-                Hurensöhne alles hurensöhn diese miesen hurensöhne allese
-                verfickte missgeburten arschkfksfks dsknfsnvsjn fsjfsknfskfnsk
-                Pimmmmmmdsl sdjkdsnsnfsnuwf das ist das hjaus vidn das ist das
-                Haus vom Nicolaus der sankt martin kam aus frankreich und gab
-                seinen mantel einen penner der ein lied für ihn sang.
-              </p>
+              <p>{text}</p>
             </div>
           </div>
           <div className="container-btns">
