@@ -7,7 +7,7 @@ import { privateKey } from "../../mdbconfig";
 import { IUser } from "../../models/interfaces";
 import { LoginValidator } from "../../helperFunctions/validators";
 
-export default async (parent: any, args: any, context: any, info: any) => {
+export default async (_: any, args: any) => {
   let { username, email, password } = args.loginInput;
   //validate data
   const val: LoginValidator = new LoginValidator(

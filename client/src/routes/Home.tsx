@@ -2,7 +2,7 @@ import React from "react";
 import { useQuery } from "@apollo/client";
 import Card from "../components/Card";
 //queries
-import { allPosts } from "../graphql/queries/allPosts";
+import { allPosts } from "../graphql/queries/allPosts.query";
 
 function Home() {
   const { loading, error, data } = useQuery(allPosts);

@@ -15,12 +15,7 @@ interface ISignUp {
   date: string;
 }
 
-export default async (
-  parent: any,
-  args: any,
-  context: any,
-  info: any
-): Promise<ISignUp> => {
+export default async (_: any, args: any): Promise<ISignUp> => {
   let { username, email, password, confirmPassword } = args.signupInput;
   // validate all data
   const val = new SignupValidator(username, email, password, confirmPassword);

@@ -7,7 +7,7 @@ import SignUp from "./routes/SignUp";
 import NavBar from "./components/NavBar";
 import "./App.css";
 
-const App: React.VFC = () => {
+const App: React.FC = () => {
   return (
     <div className="App">
       <Router>
