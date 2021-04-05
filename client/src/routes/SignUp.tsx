@@ -1,11 +1,11 @@
 import React, { useState } from "react";
 import { useHistory } from "react-router-dom";
-import { useMutation } from "@apollo/client";
+import { ApolloError, useMutation } from "@apollo/client";
 
 import { SIGNUP_USER } from "../graphql/mutations/signup.mutation";
 import "./SignUp.css";
 
-interface ISignUp {
+interface IValue {
   username: string;
   email: string;
   password: string;
@@ -13,7 +13,8 @@ interface ISignUp {
 }
 
 function SignUp() {
-  const [values, setValues] = useState<ISignUp>({
+  const [errors, setErrors] = useState<string[]>([]);
+  const [values, setValues] = useState<IValue>({
     username: "",
     email: "",
     password: "",
@@ -24,7 +25,11 @@ function SignUp() {
 
   const [signUp] = useMutation(SIGNUP_USER, {
     update(proxy, result) {
-      console.log(result.data);
+      if (result) {
+        setErrors([]);
+        console.log(result);
+        history.push("/");
+      }
     },
     variables: {
       username: values.username,
@@ -32,13 +37,18 @@ function SignUp() {
       password: values.password,
       confirmPassword: values.confirmPassword,
     },
+    onError(err: ApolloError) {
+      const e: any = err.graphQLErrors[0].extensions;
+      const arr: string[] | any = Object.values(e);
+      arr.pop();
+      arr.pop();
+      setErrors(arr);
+    },
   });
 
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>): void => {
     event.preventDefault();
-    console.log("kek");
     signUp();
-    history.push("/");
   };
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>): void => {
@@ -88,6 +98,17 @@ function SignUp() {
             <button type="submit">Sign Up</button>
           </div>
         </form>
+      </div>
+      <div className="error-container">
+        <ul className="error-list">
+          {errors.map((err: string, id: number) => {
+            return (
+              <li key={id} className="error-msg">
+                {err}
+              </li>
+            );
+          })}
+        </ul>
       </div>
     </div>
   );

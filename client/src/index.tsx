@@ -11,7 +11,7 @@ import {
   ApolloProvider,
 } from "@apollo/client";
 
-const httpLink: HttpLink = new HttpLink({ uri: "http://localhost:5000/" });
+const httpLink = new HttpLink({ uri: "http://localhost:5000/" });
 const client = new ApolloClient({
   link: httpLink,
   cache: new InMemoryCache(),

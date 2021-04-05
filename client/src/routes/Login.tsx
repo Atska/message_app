@@ -1,28 +1,48 @@
-import { useMutation } from "@apollo/client";
+import { ApolloError, useMutation } from "@apollo/client";
 import React, { useState } from "react";
 import { useHistory } from "react-router-dom";
 
 import { LOGIN_USER } from "../graphql/mutations/login.mutation";
 import "./Login.css";
 
-interface ILogin {
+interface IValue {
   username: string;
   email: string;
   password: string;
 }
 
 function Login() {
-  const [values, setValues] = useState<ILogin>({
+  const [errors, setErrors] = useState<string[]>([]);
+  const [values, setValues] = useState<IValue>({
     username: "",
     email: "",
     password: "",
   });
   //Used for redirecting to "/"
   let history = useHistory();
-
-  const [login] = useMutation(LOGIN_USER, {
-    update(proxy, result) {
-      console.log(result.data);
+  const [login, { loading }] = useMutation(LOGIN_USER, {
+    update(_, result) {
+      if (result) {
+        setErrors([]);
+        history.push("/");
+      }
+    },
+    onError(err: ApolloError) {
+      //Important: This error handling is a workaround because if existingEmail object from the backend
+      // returning and obj{existingEmail: ...} not a string!
+      const e: any = err.graphQLErrors[0].extensions;
+      const arr: string[] | any = Object.values(e);
+      if (arr[0].existingUser) {
+        const result: string[] = [arr[0].existingUser];
+        setErrors(result);
+      } else if (arr[0].correctPW) {
+        const result: string[] = [arr[0].correctPW];
+        setErrors(result);
+      } else {
+        arr.pop();
+        arr.pop();
+        setErrors(arr);
+      }
     },
     variables: {
       username: values.username,
@@ -34,12 +54,13 @@ function Login() {
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>): void => {
     event.preventDefault();
     login();
-    history.push("/");
   };
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>): void => {
     setValues({ ...values, [event.target.name]: event.target.value });
   };
+
+  if (loading) return <h1>Loading</h1>;
 
   return (
     <div className="login-container">
@@ -76,6 +97,17 @@ function Login() {
             <button type="submit">Log In</button>
           </div>
         </form>
+      </div>
+      <div className="error-container">
+        <ul className="error-list">
+          {errors.map((err: string, id: number) => {
+            return (
+              <li key={id} className="error-msg">
+                {err}
+              </li>
+            );
+          })}
+        </ul>
       </div>
     </div>
   );

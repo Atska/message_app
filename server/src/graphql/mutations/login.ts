@@ -23,10 +23,10 @@ export default async (_: any, args: any) => {
   //check if user exists
   const existingUser: IUser = await User.findOne({ username });
   if (!existingUser) {
-    errors.existingEmail = "User doesnt exist.";
+    errors.existingUser = "User doesnt exist.";
+    console.log(errors);
     throw new UserInputError("User doesnt exist.", { errors });
   }
-
   //check if pw is the same
   const check: boolean = await bcrypt.compare(password, existingUser.password);
   if (!check) {

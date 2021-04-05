@@ -17,6 +17,7 @@ class Validator {
   email: string;
   password: string;
   confirmPassword: string;
+  existingUser: string;
   errors: IError;
 
   constructor(
@@ -30,6 +31,7 @@ class Validator {
     this.password = password;
     this.confirmPassword = confirmPassword;
     this.errors = {} as IError; // also works: <IError>{};
+    this.existingUser = "";
   }
 
   validateUsername(): void {

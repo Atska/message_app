@@ -8,13 +8,18 @@ import NavBar from "./components/NavBar";
 import "./App.css";
 
 const App: React.FC = () => {
+  const [loggedIn, setLoggedIn] = React.useState<boolean>(false);
   return (
     <div className="App">
       <Router>
         <NavBar />
         <Switch>
-          <Route exact path="/" component={Home}></Route>
-          <Route exact path="/login" component={Login} />
+          <Route exact path="/">
+            <Home loggedIn={loggedIn} setLoggedIn={setLoggedIn} />
+          </Route>
+          <Route exact path="/login">
+            <Login />
+          </Route>
           <Route exact path="/signup" component={SignUp} />
         </Switch>
       </Router>
