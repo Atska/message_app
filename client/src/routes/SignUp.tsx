@@ -27,7 +27,6 @@ function SignUp() {
     update(proxy, result) {
       if (result) {
         setErrors([]);
-        console.log(result);
         history.push("/");
       }
     },

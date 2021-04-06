@@ -1,7 +1,8 @@
 import { ApolloError, useMutation } from "@apollo/client";
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import { useHistory } from "react-router-dom";
 
+import { AuthContext } from "../context";
 import { LOGIN_USER } from "../graphql/mutations/login.mutation";
 import "./Login.css";
 
@@ -12,6 +13,7 @@ interface IValue {
 }
 
 function Login() {
+  const context = useContext(AuthContext);
   const [errors, setErrors] = useState<string[]>([]);
   const [values, setValues] = useState<IValue>({
     username: "",
@@ -24,6 +26,7 @@ function Login() {
     update(_, result) {
       if (result) {
         setErrors([]);
+        context.login(result.data.login);
         history.push("/");
       }
     },
