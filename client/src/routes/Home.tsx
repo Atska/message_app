@@ -1,23 +1,21 @@
-import React from "react";
+import { useContext } from "react";
 import { useQuery } from "@apollo/client";
 import Card from "../components/Card";
 import Post from "../components/Post";
+import { AuthContext } from "../context";
 //queries
 import { allPosts } from "../graphql/queries/allPosts.query";
+import "./Home.css";
 
-interface IHome {
-  loggedIn: boolean;
-  setLoggedIn: React.Dispatch<React.SetStateAction<boolean>>;
-}
-
-function Home({ loggedIn, setLoggedIn }: IHome) {
+function Home() {
+  const { user, logout } = useContext(AuthContext);
   const { loading, error, data } = useQuery(allPosts);
 
   if (loading) return <p>Loading ...</p>;
   return (
     <div className="home">
-      <Post />
       <div className="grid">
+        {user ? <Post /> : ""}
         {data.allPosts.map((post: any) => {
           return (
             <Card

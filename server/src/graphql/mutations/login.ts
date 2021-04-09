@@ -14,7 +14,7 @@ export default async (_: any, args: any) => {
     username,
     email,
     password,
-    password
+    password //?
   );
 
   const { errors, validData } = val.validData();

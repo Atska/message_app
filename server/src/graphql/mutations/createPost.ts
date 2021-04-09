@@ -4,11 +4,14 @@ import Post from "../../models/post.model";
 import JWTverifier from "../../helperFunctions/jwtVerifier";
 import { IPost } from "../../models/interfaces";
 
-export default async (parent: any, args: any, context: any): Promise<IPost> => {
+export default async (_: any, args: any, context: any): Promise<IPost> => {
   // check if text input is valid
   const { text } = args;
   if (text.length === 0) throw new UserInputError("There is no text.");
+  if (text.length >= 200)
+    throw new UserInputError("Post can only contain 200 letters.");
   // check if user exist and authenticate
+  console.log(context);
   const user = JWTverifier(context);
   if (!user) throw new AuthenticationError("Error");
 

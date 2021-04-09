@@ -10,7 +10,6 @@ import NavBar from "./components/NavBar";
 import "./App.css";
 
 const App: React.FC = () => {
-  const [loggedIn, setLoggedIn] = React.useState<boolean>(false);
   return (
     <div className="App">
       <AuthProvider>
@@ -18,7 +17,7 @@ const App: React.FC = () => {
           <NavBar />
           <Switch>
             <Route exact path="/">
-              <Home loggedIn={loggedIn} setLoggedIn={setLoggedIn} />
+              <Home />
             </Route>
             <Route exact path="/login">
               <Login />

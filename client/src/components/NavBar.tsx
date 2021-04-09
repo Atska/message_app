@@ -1,11 +1,11 @@
-import * as React from "react";
+import { useContext } from "react";
 import { Link } from "react-router-dom";
 import { AuthContext } from "../context";
 
 import "./NavBar.css";
 
 const NavBar = () => {
-  const { user, logout } = React.useContext(AuthContext);
+  const { user, logout } = useContext(AuthContext);
 
   // If there no token -> login and signup. Otherwise logout
   const menue = user ? (

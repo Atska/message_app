@@ -24,7 +24,7 @@ function SignUp() {
   let history = useHistory();
 
   const [signUp] = useMutation(SIGNUP_USER, {
-    update(proxy, result) {
+    update(_, result) {
       if (result) {
         setErrors([]);
         history.push("/");

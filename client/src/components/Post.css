@@ -1,0 +1,22 @@
+.post {
+  width: 100%;
+  text-align: center;
+}
+
+.post-container textarea {
+  min-height: 100px;
+  width: 80%;
+  max-width: 500px;
+  margin: 0 auto;
+}
+
+.post-form {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+}
+
+.submit-btn {
+  margin: 10px;
+}

@@ -16,9 +16,9 @@ function Login() {
   const context = useContext(AuthContext);
   const [errors, setErrors] = useState<string[]>([]);
   const [values, setValues] = useState<IValue>({
-    username: "",
-    email: "",
-    password: "",
+    username: "Test",
+    email: "Test@test.com",
+    password: "test",
   });
   //Used for redirecting to "/"
   let history = useHistory();
