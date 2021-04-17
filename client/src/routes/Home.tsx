@@ -8,7 +8,7 @@ import { allPosts } from "../graphql/queries/allPosts.query";
 import "./Home.css";
 
 function Home() {
-  const { user, logout } = useContext(AuthContext);
+  const { user } = useContext(AuthContext);
   const { loading, error, data } = useQuery(allPosts);
 
   if (loading) return <p>Loading ...</p>;

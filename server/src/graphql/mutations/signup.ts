@@ -20,7 +20,7 @@ export default async (_: any, args: any): Promise<ISignUp> => {
   // validate all data
   const val = new SignupValidator(username, email, password, confirmPassword);
   const { validData, errors } = val.validData();
-  if (!validData) throw new UserInputError("An error occured..", errors);
+  if (!validData) throw new UserInputError("Passwords are wrong", errors);
   // Check if username is already taken
   const existingUser = await User.findOne({ username });
   if (existingUser) {

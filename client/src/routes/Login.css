@@ -3,8 +3,11 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  border: 1px solid green;
-  max-width: 500px;
+  border: 1px solid black;
+  box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.3);
+  max-width: 360px;
+  width: 70%;
+  margin: 100px auto;
 }
 
 .input-container form {
@@ -17,6 +20,10 @@
   margin: 0.4em auto;
 }
 
+.title-login {
+  font-size: 80%;
+}
+
 .login-btn {
   margin: 0.4em auto;
 }
@@ -27,4 +34,14 @@
   font-weight: 400;
   opacity: 0.65;
   list-style-type: square;
+}
+
+@media (min-width: 500px) {
+  .signup-container {
+    width: 50%;
+  }
+
+  .title-login {
+    font-size: 100%;
+  }
 }
