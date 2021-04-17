@@ -5,7 +5,7 @@ import { allPosts } from "../graphql/queries/allPosts.query";
 import { CREATE_POST } from "../graphql/mutations/post.mutation";
 import "./Post.css";
 
-function Post(): JSX.Element {
+function Post() {
   const [post, setPost] = useState<string>("");
   const [errors, setErrors] = useState<string>("");
 
@@ -26,7 +26,6 @@ function Post(): JSX.Element {
     },
     onError(err: ApolloError) {
       const e: any = err.graphQLErrors[0].message;
-      console.log(err);
       setErrors(e);
     },
     variables: {

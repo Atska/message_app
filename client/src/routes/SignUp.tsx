@@ -1,7 +1,7 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import { useHistory } from "react-router-dom";
 import { ApolloError, useMutation } from "@apollo/client";
-
+import { AuthContext } from "../context";
 import { SIGNUP_USER } from "../graphql/mutations/signup.mutation";
 import "./SignUp.css";
 
@@ -13,6 +13,7 @@ interface IValue {
 }
 
 function SignUp() {
+  const context = useContext(AuthContext);
   const [errors, setErrors] = useState<string[]>([]);
   const [values, setValues] = useState<IValue>({
     username: "",
@@ -27,6 +28,7 @@ function SignUp() {
     update(_, result) {
       if (result) {
         setErrors([]);
+        context.login(result.data.signup);
         history.push("/");
       }
     },
@@ -37,11 +39,19 @@ function SignUp() {
       confirmPassword: values.confirmPassword,
     },
     onError(err: ApolloError) {
-      const e: any = err.graphQLErrors[0].extensions;
-      const arr: string[] | any = Object.values(e);
-      arr.pop();
-      arr.pop();
-      setErrors(arr);
+      if (err.graphQLErrors[0].extensions) {
+        const e: any = err.graphQLErrors[0].extensions;
+        const arr: string[] | any = Object.values(e);
+        console.log(arr);
+        arr.pop();
+        arr.pop();
+        setErrors(arr);
+      }
+      if (err.graphQLErrors[0].message) {
+        const e: any = err.graphQLErrors[0].message;
+        setErrors([e]);
+      }
+      console.log(err.graphQLErrors[0]);
     },
   });
 

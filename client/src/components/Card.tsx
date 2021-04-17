@@ -1,5 +1,6 @@
 import * as React from "react";
 import dayjs from "dayjs";
+import jwt_decode from "jwt-decode";
 import { ApolloError } from "@apollo/client";
 import relativeTime from "dayjs/plugin/relativeTime";
 //icons
@@ -45,6 +46,15 @@ const Card = ({
   //format ISO-string time to relative time
   dayjs.extend(relativeTime);
 
+  const token: any = localStorage.getItem("token");
+
+  let currUser;
+  if (token) {
+    const decoded: any = jwt_decode(token);
+    if ((decoded.username = username)) currUser = username;
+    console.log(decoded.username, username);
+  }
+
   return (
     <div className="container-post">
       <div className="container-card">
@@ -80,9 +90,13 @@ const Card = ({
             </div>
             <div className="post-btns flex">
               <div className="update-btn">
-                <button className="flex-btn">
-                  <FaEdit />
-                </button>
+                {currUser ? (
+                  <button className="flex-btn">
+                    <FaEdit />
+                  </button>
+                ) : (
+                  ""
+                )}
               </div>
               <div className="post-btn">
                 <button>
