@@ -90,13 +90,9 @@ const Card = ({
             </div>
             <div className="post-btns flex">
               <div className="update-btn">
-                {currUser ? (
-                  <button className="flex-btn">
-                    <FaEdit />
-                  </button>
-                ) : (
-                  ""
-                )}
+                <button className="flex-btn">
+                  <FaEdit />
+                </button>
               </div>
               <div className="post-btn">
                 <button>
